@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hub-and-Spoke Operating Models — Banking</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#f8f8f6;color:#1a1a1a;padding:1.5rem}
+h1{font-size:18px;font-weight:500;margin-bottom:4px;color:#1a1a1a}
+.subtitle{font-size:12px;color:#888;margin-bottom:1.5rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.tab{font-size:12px;padding:5px 14px;border-radius:8px;border:0.5px solid #ccc;background:transparent;color:#666;cursor:pointer;transition:all 0.15s}
+.tab.active{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:#fff;border:0.5px solid #e5e5e5;border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+.bank-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+.bank-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.bank-name{font-size:15px;font-weight:500}
+.bank-tag{font-size:10px;padding:2px 8px;border-radius:4px;margin-top:2px;display:inline-block}
+.model-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:8px;font-size:11px;font-weight:500;margin-bottom:1rem}
+.hub-spoke-diagram{display:flex;align-items:flex-start;gap:1rem;margin:1rem 0}
+.hub-col{display:flex;flex-direction:column;align-items:center;min-width:120px;max-width:140px}
+.hub-box{padding:8px 12px;border-radius:8px;font-size:11px;font-weight:500;text-align:center;line-height:1.4;width:100%;margin-bottom:6px}
+.connector-area{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 0.25rem;gap:10px;padding-top:8px}
+.connector-line{width:28px;height:1px;background:#d1d5db}
+.spokes-col{display:flex;flex-direction:column;gap:8px;flex:1}
+.spoke-row{display:flex;align-items:flex-start;gap:6px}
+.spoke-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.spoke-box{padding:6px 10px;border-radius:8px;font-size:10px;color:#555;border:0.5px solid #e5e5e5;background:#f9f9f7;flex:1;line-height:1.5}
+.spoke-label{font-weight:600;font-size:10px;color:#1a1a1a;margin-bottom:2px}
+.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
+.detail-item{background:#f9f9f7;border-radius:8px;padding:8px 10px}
+.detail-label{font-size:10px;color:#888;margin-bottom:2px}
+.detail-val{font-size:11px;color:#1a1a1a;line-height:1.4}
+.implication{margin-top:1rem;border-left:3px solid #3b82f6;padding-left:10px;font-size:11px;color:#555;line-height:1.6}
+.implication strong{color:#1d4ed8}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th,td{padding:7px 8px;border-bottom:0.5px solid #e5e5e5;text-align:left;vertical-align:top}
+thead th{background:#f3f4f6;font-weight:500;color:#666}
+tbody tr:nth-child(even){background:#fafafa}
+td:first-child{font-weight:500;color:#444;width:130px}
+</style>
+</head>
+<body>
+<h1>AI Hub-and-Spoke Operating Models</h1>
+<p class="subtitle">How ING, DBS, JP Morgan, Emirates NBD, Revolut and Bank of America organize their AI and data capabilities — May 2025</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('ing',this)">ING</button>
+  <button class="tab" onclick="show('dbs',this)">DBS</button>
+  <button class="tab" onclick="show('jpm',this)">JP Morgan</button>
+  <button class="tab" onclick="show('enbd',this)">Emirates NBD</button>
+  <button class="tab" onclick="show('rev',this)">Revolut</button>
+  <button class="tab" onclick="show('boa',this)">Bank of America</button>
+  <button class="tab" onclick="show('compare',this)">Side-by-side</button>
+</div>
+
+<!-- ING -->
+<div class="panel active" id="p-ing">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#fef3c7;color:#92400e;">ING</div>
+    <div><div class="bank-name">ING Bank</div><span class="bank-tag" style="background:#dbeafe;color:#1d4ed8;">Traditional European bank</span></div>
+  </div>
+  <span class="model-badge" style="background:#fef3c7;color:#92400e;">Transitioning → Hub-led with emerging spokes</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#fef3c7;color:#92400e;border:1px solid #f59e0b;">Analytics Office (CoE)<br><span style="font-size:9px;font-weight:400;">~500 people · CAO Bahadir Yilmaz</span></div>
+      <div class="hub-box" style="background:#eff6ff;color:#1d4ed8;font-size:10px;">ING Hubs<br><span style="font-size:9px;font-weight:400;">Slovakia · Turkey · Manila</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f59e0b;"></div><div class="spoke-box"><div class="spoke-label">KYC / Compliance AI</div>Dedicated squad — strategic priority, early prod</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f59e0b;"></div><div class="spoke-box"><div class="spoke-label">Contact Centre AI</div>Gen AI chatbot + voice agents — deployed NL, scaling</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f59e0b;"></div><div class="spoke-box"><div class="spoke-label">Wholesale Banking</div>AI lending, client due diligence — embedded analysts</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#d1d5db;"></div><div class="spoke-box"><div class="spoke-label">Marketing AI</div>Hyper-personalisation — partially centralised</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#d1d5db;"></div><div class="spoke-box"><div class="spoke-label">Software Engineering</div>GitHub Copilot — not yet fully governed spoke</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub leadership</div><div class="detail-val">Chief Analytics Officer (CAO) — not yet CDAO</div></div>
+    <div class="detail-item"><div class="detail-label">Hub reports to</div><div class="detail-val">COO (Marnix van Stiphout) — not CEO direct</div></div>
+    <div class="detail-item"><div class="detail-label">Data platform</div><div class="detail-val">Cloud-first (Google); data lake maturing; no unified ADA-equivalent yet</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">20-step, 140-risk AI evaluation; EU AI Act ready</div></div>
+  </div>
+  <div class="implication"><strong>ING's gap vs peers:</strong> The hub exists (Analytics Office + CAO) but the spokes are still forming. There is no firmwide CDAO with CEO-line authority, no unified self-service data platform, and spoke teams in business units don't yet have dedicated AI headcount on par with DBS or JPM. Transforming to "Data and AI Org" means elevating the hub to CDAO level and maturing spoke teams into business-owned squads with clear shared KPIs.</div>
+</div>
+</div>
+
+<!-- DBS -->
+<div class="panel" id="p-dbs">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#d1fae5;color:#065f46;">DBS</div>
+    <div><div class="bank-name">DBS Bank</div><span class="bank-tag" style="background:#d1fae5;color:#065f46;">Digital leader — most mature hub-spoke model</span></div>
+  </div>
+  <span class="model-badge" style="background:#d1fae5;color:#065f46;">Mature Hub-and-Spoke — "Data Chapter" model</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#d1fae5;color:#065f46;border:1px solid #10b981;">Data Chapter Hub<br><span style="font-size:9px;font-weight:400;">700 professionals · CDTO Nimish Panchmatia</span></div>
+      <div class="hub-box" style="background:#ecfdf5;color:#064e3b;font-size:10px;">ADA Platform<br><span style="font-size:9px;font-weight:400;">5.3PB · single source of truth</span></div>
+      <div class="hub-box" style="background:#ecfdf5;color:#064e3b;font-size:10px;">ALAN + DBS-GPT<br><span style="font-size:9px;font-weight:400;">LLM infra + 2000+ models</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Consumer Banking</div>Embedded data scientists; 45M/month hyper-personalised nudges; "2-in-a-box" model</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Institutional Banking</div>AI credit, SME lending, DBS Joy chatbot (20K+ corporate users)</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Wealth Management</div>Next Best Nudge + Next Best Conversation — RM AI copilot</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Risk & Compliance</div>AML, fraud, KYC — 300+ features, 10 data sources; PURE governance</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Technology / Engineering</div>CodeBuddy agentic AI; 20% dev time saving; test gen in weeks not months</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">HR & Operations</div>AI hiring; 9 OMTs completed 2025; OMT = rebuild workflows for human-AI collaboration</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub leadership</div><div class="detail-val">Chief Data & Transformation Officer (CDTO) — reports to CEO, board mandate</div></div>
+    <div class="detail-item"><div class="detail-label">Spoke model</div><div class="detail-val">"2-in-a-box": every spoke led jointly by business lead + data lead sharing same KPIs</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">PURE framework + Responsible AI Council + Celent award; MAS FEAT principles</div></div>
+    <div class="detail-item"><div class="detail-label">Upskilling</div><div class="detail-val">9,000+ employees trained in data & AI since 2021; Data Heroes programme</div></div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> The "2-in-a-box" model forces business and data to share ownership — no spoke can say "that's the analytics team's problem." Every BU has embedded data scientists reporting to both the Data Chapter hub and their business line. ADA is the single data platform all spokes draw from, creating reuse and consistent governance at scale.</div>
+</div>
+</div>
+
+<!-- JP Morgan -->
+<div class="panel" id="p-jpm">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#dbeafe;color:#1e3a8a;">JPM</div>
+    <div><div class="bank-name">JP Morgan Chase</div><span class="bank-tag" style="background:#dbeafe;color:#1e3a8a;">Traditional — firmwide CDAO model, largest scale</span></div>
+  </div>
+  <span class="model-badge" style="background:#dbeafe;color:#1e3a8a;">Federated hub with strong central CDAO mandate</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#dbeafe;color:#1e3a8a;border:1px solid #60a5fa;">Firmwide CDAO Office<br><span style="font-size:9px;font-weight:400;">Teresa Heitsenrether · Reports to Dimon · Op. Cmte</span></div>
+      <div class="hub-box" style="background:#eff6ff;color:#1e40af;font-size:10px;">JADE + OmniAI + LLM Suite<br><span style="font-size:9px;font-weight:400;">500PB data; 200K employees on LLM Suite</span></div>
+      <div class="hub-box" style="background:#eff6ff;color:#1e40af;font-size:10px;">AI Research (200+ ML scientists)<br><span style="font-size:9px;font-weight:400;">NLP, LLM, RL — proprietary models</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Consumer & Community Banking</div>Embedded data scientists; $9B tech budget; AI fraud saves $250M+/yr</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Commercial & Investment Bank</div>Own CDAO (Daniele Magazzeni); COiN contract intelligence; AI for IB workflows</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Asset & Wealth Management</div>Coach AI — advisors 95% faster; 20% gross sales uplift YoY</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Risk & Compliance</div>AI explainability & fairness CoE; 3-LOD AI controls; model risk governance</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Technology</div>AI coding tools for 50K+ devs; 80% apps on modern infra; Infinite AI dev platform</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub authority</div><div class="detail-val">CDAO reports directly to Jamie Dimon + sits on Operating Committee</div></div>
+    <div class="detail-item"><div class="detail-label">LOB CDAOs</div><div class="detail-val">Each major LOB has its own CDAO (e.g. CIB CDAO) — true spoke leadership</div></div>
+    <div class="detail-item"><div class="detail-label">Data platform</div><div class="detail-val">JADE data fabric; 90% analytics in cloud; OmniAI for ML; LLM Suite proprietary</div></div>
+    <div class="detail-item"><div class="detail-label">Scale</div><div class="detail-val">$1.3B dedicated AI spend; 450+ use cases; $1.5B+ in AI value annually</div></div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> JPM has replicated the hub structure at the LOB level — each major business line has its own CDAO feeding into the firmwide hub. Business data ownership is mandated: "teams closest to the data should have responsibility for it." The firmwide CDAO sets strategy and standards; LOB CDAOs execute.</div>
+</div>
+</div>
+
+<!-- Emirates NBD -->
+<div class="panel" id="p-enbd">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#ede9fe;color:#5b21b6;">NBD</div>
+    <div><div class="bank-name">Emirates NBD</div><span class="bank-tag" style="background:#ede9fe;color:#5b21b6;">Emerging hub — federated data mesh approach</span></div>
+  </div>
+  <span class="model-badge" style="background:#ede9fe;color:#5b21b6;">Small central CoE → Federated data mesh</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#ede9fe;color:#5b21b6;border:1px solid #a78bfa;">Analytics CoE<br><span style="font-size:9px;font-weight:400;">~70+ professionals · Group CDIO: Rio Tinto</span></div>
+      <div class="hub-box" style="background:#f5f3ff;color:#4c1d95;font-size:10px;">Central Data Lake + Feature Store<br><span style="font-size:9px;font-weight:400;">AWS + Microsoft stack; ML pipeline CI/CD</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#8b5cf6;"></div><div class="spoke-box"><div class="spoke-label">Retail Banking</div>AI hyper-personalisation; 94% digital onboarding; predictive offers</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#8b5cf6;"></div><div class="spoke-box"><div class="spoke-label">Wholesale Banking</div>AI RM tools; transaction analytics for client leads; 100+ models</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#8b5cf6;"></div><div class="spoke-box"><div class="spoke-label">Risk & AML</div>Feature-store AML; predictive credit risk; 5–7x ROI target</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#c4b5fd;"></div><div class="spoke-box"><div class="spoke-label">HR / Operations</div>AI hiring (8K hrs + $400K saved); GitHub Copilot X for 1,000+ devs</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub model</div><div class="detail-val">Small seeder team drove federated ownership across BUs — data mesh inspired</div></div>
+    <div class="detail-item"><div class="detail-label">Key differentiator</div><div class="detail-val">Business units own their data domains; CoE sets standards and tooling</div></div>
+    <div class="detail-item"><div class="detail-label">Stack</div><div class="detail-val">Multi-cloud: AWS (SageMaker, Personalise) + Microsoft (Copilot, GitHub); federated learning in wealth</div></div>
+    <div class="detail-item"><div class="detail-label">Maturity</div><div class="detail-val">Mid-stage — 100+ models; GenAI summit hosted 2025 as internal scaling milestone</div></div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> ENBD chose a "data mesh" seed approach — a tiny central team built infrastructure and governance, then pushed data ownership to business domains. Federated learning in the wealth app demonstrates advanced privacy-preserving AI. Still growing spoke headcount and AI maturity vs DBS/JPM.</div>
+</div>
+</div>
+
+<!-- Revolut -->
+<div class="panel" id="p-rev">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#fee2e2;color:#991b1b;">REV</div>
+    <div><div class="bank-name">Revolut</div><span class="bank-tag" style="background:#fee2e2;color:#991b1b;">Neobank — no traditional hub, fully embedded</span></div>
+  </div>
+  <span class="model-badge" style="background:#fee2e2;color:#991b1b;">No hub/spoke — AI-native product squad model</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#fee2e2;color:#991b1b;border:1px solid #f87171;">Google Cloud Platform<br><span style="font-size:9px;font-weight:400;">Cloud-native; Gemini models; multi-year Google pship</span></div>
+      <div class="hub-box" style="background:#fff1f2;color:#9f1239;font-size:10px;">Internal ML platform<br><span style="font-size:9px;font-weight:400;">Product squads build directly on cloud APIs</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ef4444;"></div><div class="spoke-box"><div class="spoke-label">CX / AIR product squad</div>AIR agentic assistant — GM of CX & AI Products owns end-to-end; live UK April 2025</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ef4444;"></div><div class="spoke-box"><div class="spoke-label">Fraud & Risk squad</div>Gemini-powered fraud detection; €550M scams prevented; real-time ML</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ef4444;"></div><div class="spoke-box"><div class="spoke-label">Wealth / Investment squad</div>Robo-Advisor; AI-powered portfolio automation; €100 entry</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#fca5a5;"></div><div class="spoke-box"><div class="spoke-label">People platform (commercialised)</div>AI hiring, perf reviews — internal-first, now SaaS product externally</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub model</div><div class="detail-val">No formal hub — AI is embedded infrastructure in every product squad</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">Zero data retention with third-party AI; privacy-first by design on AIR</div></div>
+    <div class="detail-item"><div class="detail-label">Key strength</div><div class="detail-val">AIR went from announcement to live UK in under 12 months; extreme speed</div></div>
+    <div class="detail-item"><div class="detail-label">Key weakness</div><div class="detail-val">No regulatory-grade model governance or enterprise AI risk framework yet</div></div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> Revolut has no hub because it doesn't need one — AI is the product. Every squad has engineers and ML talent by default. Speed is extreme but governance is shallow. As it gains full banking licenses in more markets, this will force hub-like governance structures that it currently lacks.</div>
+</div>
+</div>
+
+<!-- BofA -->
+<div class="panel" id="p-boa">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#d1fae5;color:#065f46;">BoA</div>
+    <div><div class="bank-name">Bank of America</div><span class="bank-tag" style="background:#d1fae5;color:#065f46;">Traditional — "invest once, reuse everywhere" model</span></div>
+  </div>
+  <span class="model-badge" style="background:#d1fae5;color:#065f46;">Centralised hub — shared AI infrastructure, maximum reuse</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#d1fae5;color:#065f46;border:1px solid #10b981;">CDAO Office<br><span style="font-size:9px;font-weight:400;">$4B new tech 2025 · 1,200+ AI patents</span></div>
+      <div class="hub-box" style="background:#ecfdf5;color:#064e3b;font-size:10px;">Erica — shared NLU engine<br><span style="font-size:9px;font-weight:400;">2.5B interactions; powers all AI surfaces</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Consumer Banking</div>Erica (20M users, 2.5B interactions) — same engine reused across all digital</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Wealth / Merrill Lynch</div>"Ask Merrill" — Erica NLU reused for advisor AI copilot</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Private Bank</div>"Ask Private Bank" — same NLU layer, private client context</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Internal (90% of 213K staff)</div>"Erica for Employees" — 90%+ workforce adoption on same infrastructure</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Core philosophy</div><div class="detail-val">"Invest once, reuse everywhere" — one AI engine, many interfaces</div></div>
+    <div class="detail-item"><div class="detail-label">Scale achieved</div><div class="detail-val">90% internal AI adoption; Erica launched 2018 — 7-year head start on peers</div></div>
+    <div class="detail-item"><div class="detail-label">Key strength</div><div class="detail-val">Every new use case leverages existing infra at near-zero marginal cost</div></div>
+    <div class="detail-item"><div class="detail-label">Key weakness</div><div class="detail-val">Heavy centralisation can slow innovation in individual business lines</div></div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> BofA bet on one great NLU engine (Erica) and reused it everywhere. The same patent-protected model powers consumer, wealth, private banking, and internal ops. This maximises ROI per AI dollar but can reduce spoke agility — the flip side of the DBS/JPM distributed model.</div>
+</div>
+</div>
+
+<!-- Side-by-side -->
+<div class="panel" id="p-compare">
+<div class="card">
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th><th>ING</th><th>DBS</th><th>JP Morgan</th><th>Emirates NBD</th><th>Revolut</th><th>BofA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Model type</td><td>Hub-led, spokes forming</td><td>Mature hub + spokes (Data Chapter)</td><td>Federated hub (Firmwide CDAO + LOB CDAOs)</td><td>Small CoE → data mesh</td><td>No hub — AI-native squads</td><td>Centralised hub (reuse model)</td></tr>
+      <tr><td>Hub leader title</td><td>Chief Analytics Officer (CAO)</td><td>Chief Data & Transformation Officer (CDTO)</td><td>Chief Data & Analytics Officer (CDAO)</td><td>Group Chief Digital & Info Officer (CDIO)</td><td>GM CX & AI Products + CTO</td><td>CDAO</td></tr>
+      <tr><td>Reports to</td><td>COO</td><td>CEO / Board</td><td>CEO + Operating Committee</td><td>Group C-suite</td><td>CEO</td><td>CEO</td></tr>
+      <tr><td>Spoke model</td><td>5 strategic domains, partially embedded</td><td>2-in-a-box per BU — business + data share KPIs</td><td>LOB-level CDAOs (CIB, CCB, AWM)</td><td>Business units own data domains</td><td>Product squads (no formal spokes)</td><td>Business lines reuse central Erica engine</td></tr>
+      <tr><td>Data platform</td><td>Cloud-first (Google), maturing</td><td>ADA — 5.3PB, proprietary, self-service</td><td>JADE + OmniAI — 500PB, 90% cloud</td><td>Central data lake + AWS/MSFT feature store</td><td>GCP / Gemini — cloud-native</td><td>Erica shared NLU engine + enterprise infra</td></tr>
+      <tr><td>LLM / Gen AI platform</td><td>GitHub Copilot + M365 Copilot (external)</td><td>ALAN + DBS-GPT (proprietary)</td><td>LLM Suite (proprietary, model-agnostic)</td><td>M365 Copilot + ChatGPT (external)</td><td>Gemini API (external)</td><td>Internal LLM (Erica-based, proprietary)</td></tr>
+      <tr><td>Governance model</td><td>20-step, 140-risk eval; EU AI Act compliant</td><td>PURE + Responsible AI Council; FEAT (MAS)</td><td>AI explainability CoE; 3-LOD controls; Model risk board</td><td>Federated governance; QuantumBlack MLOps; privacy by design</td><td>Zero data retention; privacy-first; limited formal governance</td><td>1,200+ AI patents; enterprise AI risk framework</td></tr>
+      <tr><td>AI team size</td><td>~500 analytics team</td><td>700 data chapter + 9K employees trained</td><td>200+ ML scientists + LOB teams + 50K+ dev users</td><td>70+ core; scaling</td><td>Embedded in ~10K+ employees; no central count</td><td>Not public; 213K on "Erica for Employees"</td></tr>
+      <tr><td>Measured AI value</td><td>Productivity metrics; no public $ figure</td><td>SGD 750M (2024) → SGD 1B target (2025)</td><td>$1.5B+ annually; 450+ use cases</td><td>5–7x ROI target; 100+ models</td><td>€550M fraud prevented; $6B revenue (AI-enabled)</td><td>Erica: 2.5B interactions; $4B new tech spend</td></tr>
+      <tr><td>Maturity level</td><td>Transitioning (2/5)</td><td>Leading (5/5)</td><td>Leading (5/5)</td><td>Developing (3/5)</td><td>Neobank-native (4/5 speed; 2/5 governance)</td><td>Advanced (4/5)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
