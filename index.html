@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Hub-and-Spoke Operating Models — Banking</title>
+<title>AI Hub-and-Spoke Operating Models — Banking & Fintech</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:#0f1117;color:#e2e8f0;padding:1.5rem}
@@ -21,7 +21,7 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;color:#f1f5f9}
 .bank-tag{font-size:10px;padding:2px 8px;border-radius:4px;margin-top:2px;display:inline-block}
 .model-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:8px;font-size:11px;font-weight:500;margin-bottom:1rem}
 .hub-spoke-diagram{display:flex;align-items:flex-start;gap:1rem;margin:1rem 0}
-.hub-col{display:flex;flex-direction:column;align-items:center;min-width:120px;max-width:140px}
+.hub-col{display:flex;flex-direction:column;align-items:center;min-width:120px;max-width:145px}
 .hub-box{padding:8px 12px;border-radius:8px;font-size:11px;font-weight:500;text-align:center;line-height:1.4;width:100%;margin-bottom:6px}
 .connector-area{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 0.25rem;gap:10px;padding-top:8px}
 .connector-line{width:28px;height:1px;background:#2d3748}
@@ -48,16 +48,18 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;color:#f1f5f9}
 .status-pilot{background:#451a03;color:#fcd34d}
 .status-planned{background:#1e1b4b;color:#a5b4fc}
 table{width:100%;border-collapse:collapse;font-size:11px}
-th,td{padding:7px 8px;border-bottom:0.5px solid #1e293b;text-align:left;vertical-align:top;color:#cbd5e1}
+th,td{padding:7px 8px;border-bottom:0.5px solid #1e293b;text-align:left;vertical-align:top;color:#cbd5e1;min-width:120px}
 thead th{background:#0f172a;font-weight:500;color:#64748b}
 tbody tr:nth-child(even){background:#111827}
 tbody tr:hover{background:#1e293b}
-td:first-child{font-weight:500;color:#94a3b8;width:130px}
+td:first-child, th:first-child{font-weight:500;color:#94a3b8;width:130px;min-width:130px;position:sticky;left:0;background:#0f172a;z-index:5;box-shadow:2px 0 5px rgba(0,0,0,0.3)}
+th{position:sticky;top:0;background:#0f172a;z-index:2}
+th:first-child{z-index:6}
 </style>
 </head>
 <body>
 <h1>AI Hub-and-Spoke Operating Models</h1>
-<p class="subtitle">How ING, DBS, JP Morgan, Emirates NBD, Revolut and Bank of America organize their AI and data capabilities — May 2025</p>
+<p class="subtitle">How ING, DBS, JP Morgan, Emirates NBD, Revolut, Bank of America, Klarna and Capital One organize their AI and data capabilities — May 2026</p>
 
 <div class="tabs">
   <button class="tab active" onclick="show('ing',this)">ING</button>
@@ -66,6 +68,8 @@ td:first-child{font-weight:500;color:#94a3b8;width:130px}
   <button class="tab" onclick="show('enbd',this)">Emirates NBD</button>
   <button class="tab" onclick="show('rev',this)">Revolut</button>
   <button class="tab" onclick="show('boa',this)">Bank of America</button>
+  <button class="tab" onclick="show('klarna',this)">Klarna</button>
+  <button class="tab" onclick="show('capone',this)">Capital One</button>
   <button class="tab" onclick="show('compare',this)">Side-by-side</button>
 </div>
 
@@ -327,6 +331,93 @@ td:first-child{font-weight:500;color:#94a3b8;width:130px}
 </div>
 </div>
 
+<!-- Klarna -->
+<div class="panel" id="p-klarna">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#500f24;color:#fbcfe8;">KLA</div>
+    <div><div class="bank-name">Klarna Bank</div><span class="bank-tag" style="background:#471825;color:#fca5a5;">AI-Native Swedish Challenger Bank</span></div>
+  </div>
+  <span class="model-badge" style="background:#450519;color:#fda4af;">AI-Native & Platform-Led — Strategic OpenAI Partnership</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#500f24;color:#fbcfe8;border:1px solid #db2777;">Centralized AI Hub<br><span style="font-size:9px;font-weight:400;">Strategic OpenAI partnership · CEO Led</span></div>
+      <div class="hub-box" style="background:#3b071e;color:#fbcfe8;font-size:10px;">Neo4j Knowledge Graph<br><span style="font-size:9px;font-weight:400;">Replaced 1200+ legacy SaaS tools</span></div>
+      <div class="hub-box" style="background:#3b071e;color:#fbcfe8;font-size:10px;">Kiki Employee Assistant<br><span style="font-size:9px;font-weight:400;">90% workforce daily active usage</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f43f5e;"></div><div class="spoke-box"><div class="spoke-label">Customer Support AI</div>Strategic priority, handles 2/3 of support volume (equivalent to 700 full-time agents)</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f43f5e;"></div><div class="spoke-box"><div class="spoke-label">Marketing & Creative AI</div>Generates copy/images in-house, eliminating external design agencies; saved $10M/yr</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f43f5e;"></div><div class="spoke-box"><div class="spoke-label">Kiki Operations Assistant</div>Answering employee search, process inquiries, and report building instantly</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ec4899;"></div><div class="spoke-box"><div class="spoke-label">Custom Action Engines</div>Decentralized product squads build direct OpenAI API integrations to run refunds/schedules</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ec4899;"></div><div class="spoke-box"><div class="spoke-label">Software Engineering</div>Autonomous codebase setups, AI code reviews, hiring freeze for non-dev positions</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub model</div><div class="detail-val">CEO-driven strategy with centralized OpenAI enablement + Neo4j Graph foundation</div></div>
+    <div class="detail-item"><div class="detail-label">Key differentiator</div><div class="detail-val">Decommissioned 1,200+ standard SaaS apps (Salesforce, Workday) to run on consolidated internal AI graph</div></div>
+    <div class="detail-item"><div class="detail-label">Tech Stack</div><div class="detail-val">OpenAI Enterprise API + Neo4j Graph + Google Cloud partnership for creative assets and search (late 2025/2026)</div></div>
+    <div class="detail-item"><div class="detail-label">Maturity</div><div class="detail-val">Leading (5/5 speed & agility; 4/5 enterprise governance maturity)</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Live — Pivoted to Hybrid Human-in-the-Loop</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">AIR — Consumer Assistant</div><div class="agentic-item-val">Highly advanced consumer assistant in the shopping app (AIR style) managing travel, budgeting, card controls, and price checks. Dissolves multi-nested interfaces into chat</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Customer Support Pivot (2025/2026)</div><div class="agentic-item-val">Reintroduced human customer service agents to work alongside AI in a "hybrid" model. AI resolves 2/3 of routine inquiries; complex/emotional cases instantly route to flexible human teams to maintain CSAT</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Agentic Commerce via AP2</div><div class="agentic-item-val">Partnering with OpenAI and Google on AP2 agentic protocols, allowing customer AI agents to execute one-click autonomous transactions at participating merchants</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Direct APIRefund Agents</div><div class="agentic-item-val">Custom-built agents integrated directly into payment and settlement ledgers, executing transaction reversals and schedules autonomously under strict rule caps</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>Klarna's strategic vision:</strong> CEO Sebastian Siemiatkowski: "AI isn't a department; it's the core infrastructure of the entire company." Decommissioning massive legacy SaaS modules in favor of centralized Graph data represents a complete re-architecting of enterprise operations. The Q1 2026 net profitability turnaround proves the economic reality.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> Radical structural transformation. While competitors plug AI into existing systems, Klarna tore out Salesforce and Workday entirely, channeling operational data into a unified Neo4j Knowledge Graph. The 2025 pivot back to a "hybrid" support model represents an important lesson: ultimate efficiency requires human empathy as a safety guardrail.</div>
+</div>
+</div>
+
+<!-- Capital One -->
+<div class="panel" id="p-capone">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#115e59;color:#2dd4bf;">COF</div>
+    <div><div class="bank-name">Capital One</div><span class="bank-tag" style="background:#064e3b;color:#6ee7b7;">Cloud-Native Enterprise AI Pioneer</span></div>
+  </div>
+  <span class="model-badge" style="background:#115e59;color:#2dd4bf;">Centralized Platform with LOB Peer Partnerships</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#115e59;color:#2dd4bf;border:1px solid #14b8a6;">Enterprise AI & Data Hub<br><span style="font-size:9px;font-weight:400;">CDO Amy Lenander + Chief Scientist Prem Natarajan</span></div>
+      <div class="hub-box" style="background:#0f4c46;color:#2dd4bf;font-size:10px;">AWS "AI Factory"<br><span style="font-size:9px;font-weight:400;">Governed, modern pipeline; 100% cloud since 2020</span></div>
+      <div class="hub-box" style="background:#0f4c46;color:#2dd4bf;font-size:10px;">Eno NLU Engine<br><span style="font-size:9px;font-weight:400;">Conversational assistant layer; 2.5B+ interactions</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Credit Underwriting AI</div>Real-time predictive scoring, massive consumer data processing, core differentiator</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Fraud & Safety AI</div>Real-time transaction scoring, predictive defense, seamless consumer notifications</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#14b8a6;"></div><div class="spoke-box"><div class="spoke-label">Auto Finance & Sales</div>Embedded models powering "Eno for Auto Sales" and dealership pricing algorithms</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#14b8a6;"></div><div class="spoke-box"><div class="spoke-label">Retail Banking & Eno Assistant</div>Conversational customer app assistant, proactively flags unusual bills or subscriptions</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub model</div><div class="detail-val">Peered model: central Enterprise organization builds the platform and tools; lines of business embed AI teams to deploy them</div></div>
+    <div class="detail-item"><div class="detail-label">Key differentiator</div><div class="detail-val">"Data-as-a-Product" architecture, backed by a complete legacy tech shutdown in 2020 (no on-prem server debt)</div></div>
+    <div class="detail-item"><div class="detail-label">Tech Stack</div><div class="detail-val">100% cloud-native (AWS and Snowflake hybrid) + proprietary enterprise-grade MLOps pipelines</div></div>
+    <div class="detail-item"><div class="detail-label">Maturity</div><div class="detail-val">Advanced (4/5 speed; 5/5 cloud platform data maturity; 5/5 risk governance)</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Live — Governed Responsibility-by-Design</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">Responsibility-by-Design</div><div class="agentic-item-val">Rigorous framework embedding strict human-in-the-loop and software verification checks into all agentic architectures before deployment. Slower to release but regulatory-grade</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Multi-Agent Workflow Simulation</div><div class="agentic-item-val">Deploying custom multi-agent structures that simulate the company's actual business units and operational hierarchies to evaluate underwriting risk and auto sales dynamics</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Eno Proactive Scheduler</div><div class="agentic-item-val">Upgrading the Eno assistant from simple alert notifications to active planning and scheduling (handling payment schedules, balance transfers, and card freezes autonomously)</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">"AI Factory" MLOps Automation</div><div class="agentic-item-val">Automating model training, data pipeline creation, and security scanning, reducing deployment times from months to hours for retail and commercial models</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>Capital One's strategic vision:</strong> Executive Chairman Richard Fairbank: "We built an information-based strategy." Their early investment to completely shut down on-premise datacenters in 2020 means they possess a unified, clean, cloud-native dataset that is ready for generative and agentic modeling without legacy silos.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> Symbiotic peer partnership. Instead of a detached CoE, the Enterprise AI and CDO organizations work hand-in-hand with lines of business. Combined with a "data-as-a-product" framework and strict compliance safeguards, Capital One's "AI Factory" shows how a highly regulated major bank can achieve digital agility safely.</div>
+</div>
+</div>
+
 <!-- Side-by-side -->
 <div class="panel" id="p-compare">
 <div class="card">
@@ -334,20 +425,120 @@ td:first-child{font-weight:500;color:#94a3b8;width:130px}
   <table>
     <thead>
       <tr>
-        <th>Dimension</th><th>ING</th><th>DBS</th><th>JP Morgan</th><th>Emirates NBD</th><th>Revolut</th><th>BofA</th>
+        <th>Dimension</th><th>ING</th><th>DBS</th><th>JP Morgan</th><th>Emirates NBD</th><th>Revolut</th><th>BofA</th><th>Klarna</th><th>Capital One</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Model type</td><td>Hub-led, spokes forming</td><td>Mature hub + spokes (Data Chapter)</td><td>Federated hub (Firmwide CDAO + LOB CDAOs)</td><td>Small CoE → data mesh</td><td>No hub — AI-native squads</td><td>Centralised hub (reuse model)</td></tr>
-      <tr><td>Hub leader title</td><td>Chief Analytics Officer (CAO)</td><td>Chief Data & Transformation Officer (CDTO)</td><td>Chief Data & Analytics Officer (CDAO)</td><td>Group Chief Digital & Info Officer (CDIO)</td><td>GM CX & AI Products + CTO</td><td>CDAO</td></tr>
-      <tr><td>Reports to</td><td>COO</td><td>CEO / Board</td><td>CEO + Operating Committee</td><td>Group C-suite</td><td>CEO</td><td>CEO</td></tr>
-      <tr><td>Spoke model</td><td>5 strategic domains, partially embedded</td><td>2-in-a-box per BU — business + data share KPIs</td><td>LOB-level CDAOs (CIB, CCB, AWM)</td><td>Business units own data domains</td><td>Product squads (no formal spokes)</td><td>Business lines reuse central Erica engine</td></tr>
-      <tr><td>Data platform</td><td>Cloud-first (Google), maturing</td><td>ADA — 5.3PB, proprietary, self-service</td><td>JADE + OmniAI — 500PB, 90% cloud</td><td>Central data lake + AWS/MSFT feature store</td><td>GCP / Gemini — cloud-native</td><td>Erica shared NLU engine + enterprise infra</td></tr>
-      <tr><td>LLM / Gen AI platform</td><td>GitHub Copilot + M365 Copilot (external)</td><td>ALAN + DBS-GPT (proprietary)</td><td>LLM Suite (proprietary, model-agnostic)</td><td>M365 Copilot + ChatGPT (external)</td><td>Gemini API (external)</td><td>Internal LLM (Erica-based, proprietary)</td></tr>
-      <tr><td>Governance model</td><td>20-step, 140-risk eval; EU AI Act compliant</td><td>PURE + Responsible AI Council; FEAT (MAS)</td><td>AI explainability CoE; 3-LOD controls; Model risk board</td><td>Federated governance; QuantumBlack MLOps; privacy by design</td><td>Zero data retention; privacy-first; limited formal governance</td><td>1,200+ AI patents; enterprise AI risk framework</td></tr>
-      <tr><td>AI team size</td><td>~500 analytics team</td><td>700 data chapter + 9K employees trained</td><td>200+ ML scientists + LOB teams + 50K+ dev users</td><td>70+ core; scaling</td><td>Embedded in ~10K+ employees; no central count</td><td>Not public; 213K on "Erica for Employees"</td></tr>
-      <tr><td>Measured AI value</td><td>Productivity metrics; no public $ figure</td><td>SGD 750M (2024) → SGD 1B target (2025)</td><td>$1.5B+ annually; 450+ use cases</td><td>5–7x ROI target; 100+ models</td><td>€550M fraud prevented; $6B revenue (AI-enabled)</td><td>Erica: 2.5B interactions; $4B new tech spend</td></tr>
-      <tr><td>Maturity level</td><td>Transitioning (2/5)</td><td>Leading (5/5)</td><td>Leading (5/5)</td><td>Developing (3/5)</td><td>Neobank-native (4/5 speed; 2/5 governance)</td><td>Advanced (4/5)</td></tr>
+      <tr>
+        <td>Model type</td>
+        <td>Hub-led, spokes forming</td>
+        <td>Mature hub + spokes (Data Chapter)</td>
+        <td>Federated hub (CDAO + LOB)</td>
+        <td>Small CoE → data mesh</td>
+        <td>No hub — AI-native squads</td>
+        <td>Centralised hub (reuse)</td>
+        <td>AI-Native & Platform-Led</td>
+        <td>Centralized Enterprise + LOB Peer Partnerships</td>
+      </tr>
+      <tr>
+        <td>Hub leader title</td>
+        <td>Chief Analytics Officer (CAO)</td>
+        <td>Chief Data & Transformation Officer (CDTO)</td>
+        <td>Chief Data & Analytics Officer (CDAO)</td>
+        <td>Group Chief Digital & Info Officer (CDIO)</td>
+        <td>GM CX & AI Products + CTO</td>
+        <td>CDAO</td>
+        <td>CEO + CTO & VP Engineering</td>
+        <td>Chief Data Officer + Head of Enterprise AI</td>
+      </tr>
+      <tr>
+        <td>Reports to</td>
+        <td>COO</td>
+        <td>CEO / Board</td>
+        <td>CEO + Operating Committee</td>
+        <td>Group C-suite</td>
+        <td>CEO</td>
+        <td>CEO</td>
+        <td>CEO Sebastian Siemiatkowski</td>
+        <td>CEO Richard Fairbank</td>
+      </tr>
+      <tr>
+        <td>Spoke model</td>
+        <td>5 strategic domains, partially embedded</td>
+        <td>2-in-a-box per BU — business + data share KPIs</td>
+        <td>LOB-level CDAOs (CIB, CCB, AWM)</td>
+        <td>Business units own data domains</td>
+        <td>Product squads (no formal spokes)</td>
+        <td>Business lines reuse central Erica engine</td>
+        <td>Organic bottom-up squad adoption (90% daily)</td>
+        <td>Symbiotic Partnership (enterprise tools, LOB embedded scientists)</td>
+      </tr>
+      <tr>
+        <td>Data platform</td>
+        <td>Cloud-first (Google), maturing</td>
+        <td>ADA — 5.3PB, proprietary, self-service</td>
+        <td>JADE + OmniAI — 500PB, 90% cloud</td>
+        <td>Central data lake + AWS/MSFT feature store</td>
+        <td>GCP / Gemini — cloud-native</td>
+        <td>Erica shared NLU engine + enterprise infra</td>
+        <td>Central Neo4j Knowledge Graph (replaced 1,200+ SaaS tools)</td>
+        <td>Enterprise Data Platform (AWS/Snowflake hybrid)</td>
+      </tr>
+      <tr>
+        <td>LLM / Gen AI platform</td>
+        <td>GitHub Copilot + M365 Copilot (external)</td>
+        <td>ALAN + DBS-GPT (proprietary)</td>
+        <td>LLM Suite (proprietary, model-agnostic)</td>
+        <td>M365 Copilot + ChatGPT (external)</td>
+        <td>Gemini API (external)</td>
+        <td>Internal LLM (Erica-based, proprietary)</td>
+        <td>OpenAI strategic partnership (GPT-4) + Google Cloud/Gemini</td>
+        <td>AWS-hosted "AI Factory" (open-source & proprietary LLMs)</td>
+      </tr>
+      <tr>
+        <td>Governance model</td>
+        <td>20-step, 140-risk eval; EU AI Act compliant</td>
+        <td>PURE + Responsible AI Council; FEAT (MAS)</td>
+        <td>AI explainability CoE; 3-LOD controls; Model risk board</td>
+        <td>Federated governance; QuantumBlack MLOps; privacy by design</td>
+        <td>Zero data retention; privacy-first; limited formal governance</td>
+        <td>1,200+ AI patents; enterprise AI risk framework</td>
+        <td>Pivoted in 2025/2026 to hybrid "Human-in-the-Loop" support; zero retention APIs</td>
+        <td>"Responsibility-by-Design" framework; rigorous model risk board</td>
+      </tr>
+      <tr>
+        <td>AI team size</td>
+        <td>~500 analytics team</td>
+        <td>700 data chapter + 9K employees trained</td>
+        <td>200+ ML scientists + LOB teams + 50K+ dev users</td>
+        <td>70+ core; scaling</td>
+        <td>Embedded in ~10K+ employees; no central count</td>
+        <td>Not public; 213K on "Erica for Employees"</td>
+        <td>~90% of ~3,000 employees use AI daily; core AI engineering squad</td>
+        <td>Hundreds of ML engineers/data scientists + Enterprise AI team</td>
+      </tr>
+      <tr>
+        <td>Measured AI value</td>
+        <td>Productivity metrics; no public $ figure</td>
+        <td>SGD 750M (2024) → SGD 1B target (2025)</td>
+        <td>$1.5B+ annually; 450+ use cases</td>
+        <td>5–7x ROI target; 100+ models</td>
+        <td>€550M fraud prevented; $6B revenue (AI-enabled)</td>
+        <td>Erica: 2.5B interactions; $4B new tech spend</td>
+        <td>Customer Support: 2/3 chat volume ($40M/yr saved). Marketing: $10M/yr saved. Q1 2026 net profitability turnaround ($1M net income vs loss).</td>
+        <td>100% cloud-native since 2020; massive scale in automated credit decisioning & fraud scoring</td>
+      </tr>
+      <tr>
+        <td>Maturity level</td>
+        <td>Transitioning (2/5)</td>
+        <td>Leading (5/5)</td>
+        <td>Leading (5/5)</td>
+        <td>Developing (3/5)</td>
+        <td>Neobank-native (4/5 speed; 2/5 governance)</td>
+        <td>Advanced (4/5)</td>
+        <td>AI-Native Leader (5/5 speed; 4/5 governance)</td>
+        <td>Traditional Leader (4/5 speed; 5/5 governance)</td>
+      </tr>
     </tbody>
   </table>
   </div>
