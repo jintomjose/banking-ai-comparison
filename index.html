@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hub-and-Spoke Operating Models — Banking</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0f1117;color:#e2e8f0;padding:1.5rem}
+h1{font-size:18px;font-weight:500;margin-bottom:4px;color:#f1f5f9}
+.subtitle{font-size:12px;color:#64748b;margin-bottom:1.5rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.tab{font-size:12px;padding:5px 14px;border-radius:8px;border:0.5px solid #2d3748;background:transparent;color:#94a3b8;cursor:pointer;transition:all 0.15s}
+.tab.active{background:#1e3a5f;color:#60a5fa;border-color:#3b82f6}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:#1a1f2e;border:0.5px solid #2d3748;border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+.bank-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+.bank-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.bank-name{font-size:15px;font-weight:500;color:#f1f5f9}
+.bank-tag{font-size:10px;padding:2px 8px;border-radius:4px;margin-top:2px;display:inline-block}
+.model-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:8px;font-size:11px;font-weight:500;margin-bottom:1rem}
+.hub-spoke-diagram{display:flex;align-items:flex-start;gap:1rem;margin:1rem 0}
+.hub-col{display:flex;flex-direction:column;align-items:center;min-width:120px;max-width:140px}
+.hub-box{padding:8px 12px;border-radius:8px;font-size:11px;font-weight:500;text-align:center;line-height:1.4;width:100%;margin-bottom:6px}
+.connector-area{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 0.25rem;gap:10px;padding-top:8px}
+.connector-line{width:28px;height:1px;background:#2d3748}
+.spokes-col{display:flex;flex-direction:column;gap:8px;flex:1}
+.spoke-row{display:flex;align-items:flex-start;gap:6px}
+.spoke-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.spoke-box{padding:6px 10px;border-radius:8px;font-size:10px;color:#94a3b8;border:0.5px solid #2d3748;background:#111827;flex:1;line-height:1.5}
+.spoke-label{font-weight:600;font-size:10px;color:#e2e8f0;margin-bottom:2px}
+.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
+.detail-item{background:#111827;border-radius:8px;padding:8px 10px;border:0.5px solid #1e293b}
+.detail-label{font-size:10px;color:#64748b;margin-bottom:2px}
+.detail-val{font-size:11px;color:#cbd5e1;line-height:1.4}
+.implication{margin-top:1rem;border-left:3px solid #3b82f6;padding-left:10px;font-size:11px;color:#94a3b8;line-height:1.6;background:#0f172a;border-radius:0 6px 6px 0;padding:8px 10px 8px 12px}
+.implication strong{color:#60a5fa}
+.agentic-section{margin-top:1.25rem;border-top:0.5px solid #2d3748;padding-top:1rem}
+.agentic-title{font-size:12px;font-weight:600;color:#e2e8f0;margin-bottom:0.75rem;display:flex;align-items:center;gap:6px}
+.agentic-title::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#818cf8;flex-shrink:0}
+.agentic-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.agentic-item{background:#1e1b4b;border-radius:8px;padding:8px 10px;border:0.5px solid #312e81}
+.agentic-item-label{font-size:10px;color:#a5b4fc;font-weight:600;margin-bottom:2px}
+.agentic-item-val{font-size:11px;color:#c7d2fe;line-height:1.4}
+.agentic-status{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 8px;border-radius:4px;margin-bottom:8px;font-weight:500}
+.status-live{background:#064e3b;color:#6ee7b7}
+.status-pilot{background:#451a03;color:#fcd34d}
+.status-planned{background:#1e1b4b;color:#a5b4fc}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th,td{padding:7px 8px;border-bottom:0.5px solid #1e293b;text-align:left;vertical-align:top;color:#cbd5e1}
+thead th{background:#0f172a;font-weight:500;color:#64748b}
+tbody tr:nth-child(even){background:#111827}
+tbody tr:hover{background:#1e293b}
+td:first-child{font-weight:500;color:#94a3b8;width:130px}
+</style>
+</head>
+<body>
+<h1>AI Hub-and-Spoke Operating Models</h1>
+<p class="subtitle">How ING, DBS, JP Morgan, Emirates NBD, Revolut and Bank of America organize their AI and data capabilities — May 2025</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('ing',this)">ING</button>
+  <button class="tab" onclick="show('dbs',this)">DBS</button>
+  <button class="tab" onclick="show('jpm',this)">JP Morgan</button>
+  <button class="tab" onclick="show('enbd',this)">Emirates NBD</button>
+  <button class="tab" onclick="show('rev',this)">Revolut</button>
+  <button class="tab" onclick="show('boa',this)">Bank of America</button>
+  <button class="tab" onclick="show('compare',this)">Side-by-side</button>
+</div>
+
+<!-- ING -->
+<div class="panel active" id="p-ing">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#451a03;color:#fcd34d;">ING</div>
+    <div><div class="bank-name">ING Bank</div><span class="bank-tag" style="background:#1e3a5f;color:#60a5fa;">Traditional European bank</span></div>
+  </div>
+  <span class="model-badge" style="background:#451a03;color:#fcd34d;">Transitioning → Hub-led with emerging spokes</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#451a03;color:#fcd34d;border:1px solid #92400e;">Analytics Office (CoE)<br><span style="font-size:9px;font-weight:400;">~500 people · CAO Bahadir Yilmaz</span></div>
+      <div class="hub-box" style="background:#1e3a5f;color:#60a5fa;font-size:10px;">ING Hubs<br><span style="font-size:9px;font-weight:400;">Slovakia · Turkey · Manila</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f59e0b;"></div><div class="spoke-box"><div class="spoke-label">KYC / Compliance AI</div>Dedicated squad — strategic priority, early prod</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f59e0b;"></div><div class="spoke-box"><div class="spoke-label">Contact Centre AI</div>Gen AI chatbot + voice agents — deployed NL, scaling</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#f59e0b;"></div><div class="spoke-box"><div class="spoke-label">Wholesale Banking</div>AI lending, client due diligence — embedded analysts</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#d1d5db;"></div><div class="spoke-box"><div class="spoke-label">Marketing AI</div>Hyper-personalisation — partially centralised</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#d1d5db;"></div><div class="spoke-box"><div class="spoke-label">Software Engineering</div>GitHub Copilot — not yet fully governed spoke</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub leadership</div><div class="detail-val">Chief Analytics Officer (CAO) — not yet CDAO</div></div>
+    <div class="detail-item"><div class="detail-label">Hub reports to</div><div class="detail-val">COO (Marnix van Stiphout) — not CEO direct</div></div>
+    <div class="detail-item"><div class="detail-label">Data platform</div><div class="detail-val">Cloud-first (Google); data lake maturing; no unified ADA-equivalent yet</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">20-step, 140-risk AI evaluation; EU AI Act ready</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Live in production</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">Mortgage Agent (2025→2026)</div><div class="agentic-item-val">Agentic back-office system extracts docs, runs credit checks autonomously. Full end-to-end agentic mortgage application launching 2026 — customer talks to agent, not a person</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">KYC / CDD Agent</div><div class="agentic-item-val">Agent answers 70–80 of 100 KYC questions autonomously using public + behavioural data. Already in early production — humans review edge cases only</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Contact Centre Agents</div><div class="agentic-item-val">24/7 voice + chat agents live across retail franchises. Not just FAQ — they summarise issues, suggest next steps, route cases. 25% productivity gain reported</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">One Global Agent Platform</div><div class="agentic-item-val">Single platform for all countries/domains — standardises model onboarding, monitoring, auditability. 90% of ING pilots reach production vs 30% industry average</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>ING's agentic ambition:</strong> Pinar Abay (Retail Board) said "waiting is not an option — being number one in agentic AI is essential to ING's growth plan." The strategic bet is mortgage + KYC agents by 2026, with a shared global agent platform underpinning all markets. EU AI Act compliance (human-in-loop) is baked in from the start.</div>
+  </div>
+  <div class="implication"><strong>ING's gap vs peers:</strong> The hub exists (Analytics Office + CAO) but the spokes are still forming. There is no firmwide CDAO with CEO-line authority, no unified self-service data platform, and spoke teams in business units don't yet have dedicated AI headcount on par with DBS or JPM. Transforming to "Data and AI Org" means elevating the hub to CDAO level and maturing spoke teams into business-owned squads with clear shared KPIs.</div>
+</div>
+</div>
+
+<!-- DBS -->
+<div class="panel" id="p-dbs">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#064e3b;color:#6ee7b7;">DBS</div>
+    <div><div class="bank-name">DBS Bank</div><span class="bank-tag" style="background:#064e3b;color:#6ee7b7;">Digital leader — most mature hub-spoke model</span></div>
+  </div>
+  <span class="model-badge" style="background:#064e3b;color:#6ee7b7;">Mature Hub-and-Spoke — "Data Chapter" model</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#064e3b;color:#6ee7b7;border:1px solid #10b981;">Data Chapter Hub<br><span style="font-size:9px;font-weight:400;">700 professionals · CDTO Nimish Panchmatia</span></div>
+      <div class="hub-box" style="background:#022c22;color:#34d399;font-size:10px;">ADA Platform<br><span style="font-size:9px;font-weight:400;">5.3PB · single source of truth</span></div>
+      <div class="hub-box" style="background:#022c22;color:#34d399;font-size:10px;">ALAN + DBS-GPT<br><span style="font-size:9px;font-weight:400;">LLM infra + 2000+ models</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Consumer Banking</div>Embedded data scientists; 45M/month hyper-personalised nudges; "2-in-a-box" model</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Institutional Banking</div>AI credit, SME lending, DBS Joy chatbot (20K+ corporate users)</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Wealth Management</div>Next Best Nudge + Next Best Conversation — RM AI copilot</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Risk & Compliance</div>AML, fraud, KYC — 300+ features, 10 data sources; PURE governance</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Technology / Engineering</div>CodeBuddy agentic AI; 20% dev time saving; test gen in weeks not months</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">HR & Operations</div>AI hiring; 9 OMTs completed 2025; OMT = rebuild workflows for human-AI collaboration</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub leadership</div><div class="detail-val">Chief Data & Transformation Officer (CDTO) — reports to CEO, board mandate</div></div>
+    <div class="detail-item"><div class="detail-label">Spoke model</div><div class="detail-val">"2-in-a-box": every spoke led jointly by business lead + data lead sharing same KPIs</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">PURE framework + Responsible AI Council + Celent award; MAS FEAT principles</div></div>
+    <div class="detail-item"><div class="detail-label">Upskilling</div><div class="detail-val">9,000+ employees trained in data & AI since 2021; Data Heroes programme</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Live — moving copilot → autopilot</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">OMT — Operating Model Transformation</div><div class="agentic-item-val">9 OMTs completed in 2025 (target was 6) — each OMT rebuilds an entire workflow for human-AI collaboration. Agentic AI replaces manual process steps, not just assists</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">SWIFT Message Agent</div><div class="agentic-item-val">Agentic AI synthesises and classifies complex SWIFT transaction messages autonomously, presenting actionable summaries to humans for approval — live in institutional banking</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Scam Intervention Agent</div><div class="agentic-item-val">Agent monitors real-time transaction patterns, detects coercion signals, and autonomously delivers behavioural nudges to interrupt high-risk payments before they complete</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">CodeBuddy — Agentic Dev</div><div class="agentic-item-val">Agentic coding assistant generates tests, reviews PRs, and suggests refactors autonomously. 20% developer time saving measured. Part of broader "autopilot" vision for tech operations</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>DBS's agentic vision:</strong> CEO Tan Su Shan: "We foresee a transition from AI as copilot to AI operating on autopilot." DBS hit SGD 1B in AI economic value in 2025 and is now scaling agentic into every LOB via OMT. 10,000+ staff on AI learning roadmaps to supervise agents — governance-first approach.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> The "2-in-a-box" model forces business and data to share ownership — no spoke can say "that's the analytics team's problem." Every BU has embedded data scientists reporting to both the Data Chapter hub and their business line. ADA is the single data platform all spokes draw from, creating reuse and consistent governance at scale.</div>
+</div>
+</div>
+
+<!-- JP Morgan -->
+<div class="panel" id="p-jpm">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#1e3a5f;color:#60a5fa;">JPM</div>
+    <div><div class="bank-name">JP Morgan Chase</div><span class="bank-tag" style="background:#1e3a5f;color:#60a5fa;">Traditional — firmwide CDAO model, largest scale</span></div>
+  </div>
+  <span class="model-badge" style="background:#1e3a5f;color:#60a5fa;">Federated hub with strong central CDAO mandate</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#1e3a5f;color:#60a5fa;border:1px solid #60a5fa;">Firmwide CDAO Office<br><span style="font-size:9px;font-weight:400;">Teresa Heitsenrether · Reports to Dimon · Op. Cmte</span></div>
+      <div class="hub-box" style="background:#172554;color:#93c5fd;font-size:10px;">JADE + OmniAI + LLM Suite<br><span style="font-size:9px;font-weight:400;">500PB data; 200K employees on LLM Suite</span></div>
+      <div class="hub-box" style="background:#172554;color:#93c5fd;font-size:10px;">AI Research (200+ ML scientists)<br><span style="font-size:9px;font-weight:400;">NLP, LLM, RL — proprietary models</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Consumer & Community Banking</div>Embedded data scientists; $9B tech budget; AI fraud saves $250M+/yr</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Commercial & Investment Bank</div>Own CDAO (Daniele Magazzeni); COiN contract intelligence; AI for IB workflows</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Asset & Wealth Management</div>Coach AI — advisors 95% faster; 20% gross sales uplift YoY</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Risk & Compliance</div>AI explainability & fairness CoE; 3-LOD AI controls; model risk governance</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Technology</div>AI coding tools for 50K+ devs; 80% apps on modern infra; Infinite AI dev platform</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub authority</div><div class="detail-val">CDAO reports directly to Jamie Dimon + sits on Operating Committee</div></div>
+    <div class="detail-item"><div class="detail-label">LOB CDAOs</div><div class="detail-val">Each major LOB has its own CDAO (e.g. CIB CDAO) — true spoke leadership</div></div>
+    <div class="detail-item"><div class="detail-label">Data platform</div><div class="detail-val">JADE data fabric; 90% analytics in cloud; OmniAI for ML; LLM Suite proprietary</div></div>
+    <div class="detail-item"><div class="detail-label">Scale</div><div class="detail-val">$1.3B dedicated AI spend; 450+ use cases; $1.5B+ in AI value annually</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Rolling out firmwide — "fully AI-connected enterprise"</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">LLM Suite → Agentic Agents</div><div class="agentic-item-val">250K employees on LLM Suite. Now in next phase: agentic AI for multi-step complex tasks. Updated every 8 weeks. Investment bankers build 5-page decks in 30 seconds</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">IB Memo & M&A Agents</div><div class="agentic-item-val">Agents draft confidential M&A memos, pitch decks, covenant extraction autonomously. Reduces junior banker workload significantly — ops staff projected to fall 10%+</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Agentic Commerce (Payments)</div><div class="agentic-item-val">JP Morgan Payments building agentic commerce infrastructure — enabling AI agents to transact on behalf of customers. Working with merchants on agent payment standards (no human click needed)</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Agent Security Framework</div><div class="agentic-item-val">Published "lethal trifecta" framework: agents that combine untrusted inputs + sensitive data + external action authority require continuous enforcement. Industry-leading agentic governance</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>JPM's agentic vision:</strong> CDAO Derek Waldron: "The JPMorgan of the future is a fully AI-connected enterprise — every employee has an AI agent, every process is automated, every client experience is AI-curated." This is the most explicit and funded agentic roadmap in banking. $1.5B+ annual AI value, growing 30–40% YoY.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> JPM has replicated the hub structure at the LOB level — each major business line has its own CDAO feeding into the firmwide hub. Business data ownership is mandated: "teams closest to the data should have responsibility for it." The firmwide CDAO sets strategy and standards; LOB CDAOs execute.</div>
+</div>
+</div>
+
+<!-- Emirates NBD -->
+<div class="panel" id="p-enbd">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#2e1065;color:#c4b5fd;">NBD</div>
+    <div><div class="bank-name">Emirates NBD</div><span class="bank-tag" style="background:#2e1065;color:#c4b5fd;">Emerging hub — federated data mesh approach</span></div>
+  </div>
+  <span class="model-badge" style="background:#2e1065;color:#c4b5fd;">Small central CoE → Federated data mesh</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#2e1065;color:#c4b5fd;border:1px solid #a78bfa;">Analytics CoE<br><span style="font-size:9px;font-weight:400;">~70+ professionals · Group CDIO: Rio Tinto</span></div>
+      <div class="hub-box" style="background:#1e1b4b;color:#a5b4fc;font-size:10px;">Central Data Lake + Feature Store<br><span style="font-size:9px;font-weight:400;">AWS + Microsoft stack; ML pipeline CI/CD</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#8b5cf6;"></div><div class="spoke-box"><div class="spoke-label">Retail Banking</div>AI hyper-personalisation; 94% digital onboarding; predictive offers</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#8b5cf6;"></div><div class="spoke-box"><div class="spoke-label">Wholesale Banking</div>AI RM tools; transaction analytics for client leads; 100+ models</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#8b5cf6;"></div><div class="spoke-box"><div class="spoke-label">Risk & AML</div>Feature-store AML; predictive credit risk; 5–7x ROI target</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#c4b5fd;"></div><div class="spoke-box"><div class="spoke-label">HR / Operations</div>AI hiring (8K hrs + $400K saved); GitHub Copilot X for 1,000+ devs</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub model</div><div class="detail-val">Small seeder team drove federated ownership across BUs — data mesh inspired</div></div>
+    <div class="detail-item"><div class="detail-label">Key differentiator</div><div class="detail-val">Business units own their data domains; CoE sets standards and tooling</div></div>
+    <div class="detail-item"><div class="detail-label">Stack</div><div class="detail-val">Multi-cloud: AWS (SageMaker, Personalise) + Microsoft (Copilot, GitHub); federated learning in wealth</div></div>
+    <div class="detail-item"><div class="detail-label">Maturity</div><div class="detail-val">Mid-stage — 100+ models; GenAI summit hosted 2025 as internal scaling milestone</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-pilot">◐ Pilots active — onboarding & HR first</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">Agentic Onboarding (HR)</div><div class="agentic-item-val">Goal: candidate enters info once only — agent automates pre-boarding and onboarding end-to-end. Piloting with HireVue + Microsoft stack. Aspiration is zero manual touchpoints</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Voice Banking Agent</div><div class="agentic-item-val">Amazon Polly-powered voice agent in call centre — lifelike voice banking for routine queries. Moving toward agentic resolution (not just routing) for common customer requests</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Intelligent Workforce Planning</div><div class="agentic-item-val">Agentic AI for talent planning by 2026: predict right talent at right time, automate 'bot vs buy vs build' decisions for skills. Top of mind agenda for 2026 and 2030 roadmap</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Personalised Retail Agents</div><div class="agentic-item-val">Amazon Personalise + SageMaker powering next-best-action agents in retail banking. 94% digital onboarding already — agentic layer to remove remaining manual steps</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>Emirates NBD's agentic position:</strong> Agentic AI is firmly on the agenda but still in pilot/aspiration phase — most advanced in HR and onboarding automation. Retail banking agents are next. Behind DBS/JPM on autonomous deployment but ahead on specific use-case focus (workforce planning is a differentiator).</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> ENBD chose a "data mesh" seed approach — a tiny central team built infrastructure and governance, then pushed data ownership to business domains. Federated learning in the wealth app demonstrates advanced privacy-preserving AI. Still growing spoke headcount and AI maturity vs DBS/JPM.</div>
+</div>
+</div>
+
+<!-- Revolut -->
+<div class="panel" id="p-rev">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#450a0a;color:#fca5a5;">REV</div>
+    <div><div class="bank-name">Revolut</div><span class="bank-tag" style="background:#450a0a;color:#fca5a5;">Neobank — no traditional hub, fully embedded</span></div>
+  </div>
+  <span class="model-badge" style="background:#450a0a;color:#fca5a5;">No hub/spoke — AI-native product squad model</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#450a0a;color:#fca5a5;border:1px solid #f87171;">Google Cloud Platform<br><span style="font-size:9px;font-weight:400;">Cloud-native; Gemini models; multi-year Google pship</span></div>
+      <div class="hub-box" style="background:#4c0519;color:#fda4af;font-size:10px;">Internal ML platform<br><span style="font-size:9px;font-weight:400;">Product squads build directly on cloud APIs</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ef4444;"></div><div class="spoke-box"><div class="spoke-label">CX / AIR product squad</div>AIR agentic assistant — GM of CX & AI Products owns end-to-end; live UK April 2025</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ef4444;"></div><div class="spoke-box"><div class="spoke-label">Fraud & Risk squad</div>Gemini-powered fraud detection; €550M scams prevented; real-time ML</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#ef4444;"></div><div class="spoke-box"><div class="spoke-label">Wealth / Investment squad</div>Robo-Advisor; AI-powered portfolio automation; €100 entry</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#fca5a5;"></div><div class="spoke-box"><div class="spoke-label">People platform (commercialised)</div>AI hiring, perf reviews — internal-first, now SaaS product externally</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub model</div><div class="detail-val">No formal hub — AI is embedded infrastructure in every product squad</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">Zero data retention with third-party AI; privacy-first by design on AIR</div></div>
+    <div class="detail-item"><div class="detail-label">Key strength</div><div class="detail-val">AIR went from announcement to live UK in under 12 months; extreme speed</div></div>
+    <div class="detail-item"><div class="detail-label">Key weakness</div><div class="detail-val">No regulatory-grade model governance or enterprise AI risk framework yet</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Live — AIR launched April 2026, UK-first</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">AIR — AI by Revolut</div><div class="agentic-item-val">Fully agentic in-app assistant live for 13M UK users (April 2026). Dissolves menu system entirely — handles investments, card controls, budgets, eSIM, travel in one conversation. Zero data retention</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Agentic Commerce (Revolut Pay)</div><div class="agentic-item-val">Partnered with Google AP2 protocol — Revolut Pay compatible with AI agent checkout. Customers' AI agents can pay at merchants without human click. First mover in agentic payments in EEA/UK</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Voice & Sales Agents (Building)</div><div class="agentic-item-val">Internal AI unit hiring for voice products and sales agents — AIR is just the start. Next: proactive sales agents that surface offers, remind of renewals, and execute financial actions</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">People Platform Agents</div><div class="agentic-item-val">Internal AI hiring, performance review and engagement agents — already commercialised as external SaaS. Shows Revolut's willingness to productise internal agentic capability</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>Revolut's agentic edge:</strong> AIR is the most consumer-facing agentic banking product live today in Europe. Speed: announcement Nov 2024 → live April 2026 (17 months). Data advantage: 1B+ transactions/month across 70M customers feeds agent personalisation. Risk: governance is thin — privacy-first but no regulatory AI risk framework yet.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> Revolut has no hub because it doesn't need one — AI is the product. Every squad has engineers and ML talent by default. Speed is extreme but governance is shallow. As it gains full banking licenses in more markets, this will force hub-like governance structures that it currently lacks.</div>
+</div>
+</div>
+
+<!-- BofA -->
+<div class="panel" id="p-boa">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#064e3b;color:#6ee7b7;">BoA</div>
+    <div><div class="bank-name">Bank of America</div><span class="bank-tag" style="background:#064e3b;color:#6ee7b7;">Traditional — "invest once, reuse everywhere" model</span></div>
+  </div>
+  <span class="model-badge" style="background:#064e3b;color:#6ee7b7;">Centralised hub — shared AI infrastructure, maximum reuse</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#064e3b;color:#6ee7b7;border:1px solid #10b981;">CDAO Office<br><span style="font-size:9px;font-weight:400;">$4B new tech 2025 · 1,200+ AI patents</span></div>
+      <div class="hub-box" style="background:#022c22;color:#34d399;font-size:10px;">Erica — shared NLU engine<br><span style="font-size:9px;font-weight:400;">2.5B interactions; powers all AI surfaces</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Consumer Banking</div>Erica (20M users, 2.5B interactions) — same engine reused across all digital</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Wealth / Merrill Lynch</div>"Ask Merrill" — Erica NLU reused for advisor AI copilot</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Private Bank</div>"Ask Private Bank" — same NLU layer, private client context</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#10b981;"></div><div class="spoke-box"><div class="spoke-label">Internal (90% of 213K staff)</div>"Erica for Employees" — 90%+ workforce adoption on same infrastructure</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Core philosophy</div><div class="detail-val">"Invest once, reuse everywhere" — one AI engine, many interfaces</div></div>
+    <div class="detail-item"><div class="detail-label">Scale achieved</div><div class="detail-val">90% internal AI adoption; Erica launched 2018 — 7-year head start on peers</div></div>
+    <div class="detail-item"><div class="detail-label">Key strength</div><div class="detail-val">Every new use case leverages existing infra at near-zero marginal cost</div></div>
+    <div class="detail-item"><div class="detail-label">Key weakness</div><div class="detail-val">Heavy centralisation can slow innovation in individual business lines</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-live">● Erica evolving → agentic; internal agents expanding</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">Erica → Agentic Erica</div><div class="agentic-item-val">2.5B interactions to date. Erica is evolving from reactive assistant to proactive agentic system — surfacing alerts, executing bill pays, and flagging unusual patterns without user prompting</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">"Erica for Employees" Agents</div><div class="agentic-item-val">90%+ of 213K staff use internal Erica. Being extended with agentic capabilities: auto-drafts, research agents for advisors, meeting-to-action summaries. Internal adoption is the proving ground</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Ask Merrill / Ask Private Bank</div><div class="agentic-item-val">Advisor AI moving toward agentic — not just answering questions but proactively surfacing portfolio alerts, client next-best-actions, and compliance flags without RM prompting</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">1,200+ AI Patents</div><div class="agentic-item-val">BofA holds the largest AI patent portfolio in banking — including agentic interaction patterns, NLU architectures, and autonomous financial planning methods. IP moat is strategic differentiator</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>BofA's agentic approach:</strong> "Invest once, reuse everywhere" applies to agentic too — Erica's NLU engine is being extended into agentic territory across all surfaces simultaneously. Slower to brand it "agentic" publicly vs JPM/Revolut, but scale (213K employees, 20M consumers on same engine) means agentic uplift is enterprise-wide from day one.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> BofA bet on one great NLU engine (Erica) and reused it everywhere. The same patent-protected model powers consumer, wealth, private banking, and internal ops. This maximises ROI per AI dollar but can reduce spoke agility — the flip side of the DBS/JPM distributed model.</div>
+</div>
+</div>
+
+<!-- Side-by-side -->
+<div class="panel" id="p-compare">
+<div class="card">
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th><th>ING</th><th>DBS</th><th>JP Morgan</th><th>Emirates NBD</th><th>Revolut</th><th>BofA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Model type</td><td>Hub-led, spokes forming</td><td>Mature hub + spokes (Data Chapter)</td><td>Federated hub (Firmwide CDAO + LOB CDAOs)</td><td>Small CoE → data mesh</td><td>No hub — AI-native squads</td><td>Centralised hub (reuse model)</td></tr>
+      <tr><td>Hub leader title</td><td>Chief Analytics Officer (CAO)</td><td>Chief Data & Transformation Officer (CDTO)</td><td>Chief Data & Analytics Officer (CDAO)</td><td>Group Chief Digital & Info Officer (CDIO)</td><td>GM CX & AI Products + CTO</td><td>CDAO</td></tr>
+      <tr><td>Reports to</td><td>COO</td><td>CEO / Board</td><td>CEO + Operating Committee</td><td>Group C-suite</td><td>CEO</td><td>CEO</td></tr>
+      <tr><td>Spoke model</td><td>5 strategic domains, partially embedded</td><td>2-in-a-box per BU — business + data share KPIs</td><td>LOB-level CDAOs (CIB, CCB, AWM)</td><td>Business units own data domains</td><td>Product squads (no formal spokes)</td><td>Business lines reuse central Erica engine</td></tr>
+      <tr><td>Data platform</td><td>Cloud-first (Google), maturing</td><td>ADA — 5.3PB, proprietary, self-service</td><td>JADE + OmniAI — 500PB, 90% cloud</td><td>Central data lake + AWS/MSFT feature store</td><td>GCP / Gemini — cloud-native</td><td>Erica shared NLU engine + enterprise infra</td></tr>
+      <tr><td>LLM / Gen AI platform</td><td>GitHub Copilot + M365 Copilot (external)</td><td>ALAN + DBS-GPT (proprietary)</td><td>LLM Suite (proprietary, model-agnostic)</td><td>M365 Copilot + ChatGPT (external)</td><td>Gemini API (external)</td><td>Internal LLM (Erica-based, proprietary)</td></tr>
+      <tr><td>Governance model</td><td>20-step, 140-risk eval; EU AI Act compliant</td><td>PURE + Responsible AI Council; FEAT (MAS)</td><td>AI explainability CoE; 3-LOD controls; Model risk board</td><td>Federated governance; QuantumBlack MLOps; privacy by design</td><td>Zero data retention; privacy-first; limited formal governance</td><td>1,200+ AI patents; enterprise AI risk framework</td></tr>
+      <tr><td>AI team size</td><td>~500 analytics team</td><td>700 data chapter + 9K employees trained</td><td>200+ ML scientists + LOB teams + 50K+ dev users</td><td>70+ core; scaling</td><td>Embedded in ~10K+ employees; no central count</td><td>Not public; 213K on "Erica for Employees"</td></tr>
+      <tr><td>Measured AI value</td><td>Productivity metrics; no public $ figure</td><td>SGD 750M (2024) → SGD 1B target (2025)</td><td>$1.5B+ annually; 450+ use cases</td><td>5–7x ROI target; 100+ models</td><td>€550M fraud prevented; $6B revenue (AI-enabled)</td><td>Erica: 2.5B interactions; $4B new tech spend</td></tr>
+      <tr><td>Maturity level</td><td>Transitioning (2/5)</td><td>Leading (5/5)</td><td>Leading (5/5)</td><td>Developing (3/5)</td><td>Neobank-native (4/5 speed; 2/5 governance)</td><td>Advanced (4/5)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
