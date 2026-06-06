@@ -74,6 +74,8 @@ th:first-child{z-index:6}
   <button class="tab" onclick="show('boa',this)">Bank of America</button>
   <button class="tab" onclick="show('klarna',this)">Klarna</button>
   <button class="tab" onclick="show('capone',this)">Capital One</button>
+  <button class="tab" onclick="show('abn',this)">ABN AMRO</button>
+  <button class="tab" onclick="show('rabo',this)">Rabobank</button>
   <button class="tab" onclick="show('compare',this)">Side-by-side</button>
 </div>
 
@@ -422,6 +424,94 @@ th:first-child{z-index:6}
 </div>
 </div>
 
+<!-- ABN AMRO -->
+<div class="panel" id="p-abn">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#1e3a5f;color:#93c5fd;">ABN</div>
+    <div><div class="bank-name">ABN AMRO</div><span class="bank-tag" style="background:#1e3a5f;color:#93c5fd;">Traditional Dutch bank — compliance-first AI approach</span></div>
+  </div>
+  <span class="model-badge" style="background:#1e3a5f;color:#93c5fd;">Centralised CDAO hub — risk-led, Azure-native</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#1e3a5f;color:#93c5fd;border:1px solid #3b82f6;">Data & Analytics CoE<br><span style="font-size:9px;font-weight:400;">CDAO function · ~200 data scientists · Azure-native</span></div>
+      <div class="hub-box" style="background:#172554;color:#93c5fd;font-size:10px;">Azure OpenAI Platform<br><span style="font-size:9px;font-weight:400;">Microsoft strategic partner · private deployment</span></div>
+      <div class="hub-box" style="background:#172554;color:#93c5fd;font-size:10px;">Anna Virtual Assistant<br><span style="font-size:9px;font-weight:400;">Customer-facing NLU · retail + private banking</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Financial Crime / AML</div>AI transaction monitoring; NLP for adverse media screening; post-regulator investment priority</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Retail & Mortgage Banking</div>AI mortgage advisory (2025); Anna chatbot; predictive next-best-action for retail customers</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#3b82f6;"></div><div class="spoke-box"><div class="spoke-label">Credit Risk</div>ML-based credit scoring for SME and consumer; real-time risk engine on Azure</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#93c5fd;"></div><div class="spoke-box"><div class="spoke-label">Employee Productivity (Copilot)</div>M365 Copilot rollout across ~19K employees; internal knowledge search; code assist</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#93c5fd;"></div><div class="spoke-box"><div class="spoke-label">Private Banking / Wealth</div>AI-driven portfolio insights; client reporting automation; ESG scoring models</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Hub leadership</div><div class="detail-val">CDAO function embedded under CRO/CFO; data strategy tied to risk mandate</div></div>
+    <div class="detail-item"><div class="detail-label">Cloud platform</div><div class="detail-val">Microsoft Azure — Azure OpenAI Service; private model deployment for GDPR compliance</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">Responsible AI framework; EU AI Act compliance; DNB (Dutch regulator) supervised model risk</div></div>
+    <div class="detail-item"><div class="detail-label">Key context</div><div class="detail-val">Heavy AML/financial crime AI investment post-2021 regulatory settlement with Dutch authorities (€480M fine)</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-pilot">◐ Pilots active — compliance-first deployment pace</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">Anna → Agentic Advisor</div><div class="agentic-item-val">Anna virtual assistant evolving from FAQ resolution to agentic mortgage and investment advisory. Goal: end-to-end digital mortgage application with AI handling document extraction and credit check orchestration autonomously</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">AML Investigation Agent</div><div class="agentic-item-val">Agentic AI to autonomously triage and draft SAR (Suspicious Activity Reports) — reducing analyst workload. Combines NLP adverse media screening with transaction graph analysis. Pilot with DNB oversight</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">M365 Copilot Agents</div><div class="agentic-item-val">Enterprise-wide Copilot deployment enabling agentic document drafting, meeting summaries, and internal policy search. ~19K employees targeted. Compliance-reviewed before each rollout phase</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">ESG / Climate Risk Agent</div><div class="agentic-item-val">Building agentic AI to automatically score commercial loan portfolio against EU taxonomy and CSRD climate risk requirements. Integrates external climate data feeds with internal credit models</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>ABN AMRO's agentic position:</strong> Deliberate and regulation-led. The 2021 AML settlement transformed ABN's approach to AI — compliance and financial crime AI became the #1 investment priority, creating unexpected AI maturity in risk domains. Agentic ambitions are real but governed tightly under DNB supervision. Azure OpenAI private deployment ensures data residency in the Netherlands.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> ABN AMRO's compliance burden became an AI accelerant — the regulatory requirement to fix AML at scale forced rapid ML adoption in financial crime, building institutional AI capability that now extends into commercial and retail banking. Conservative Dutch governance culture means slower agentic deployment vs neobanks, but higher trust in regulated domains.</div>
+</div>
+</div>
+
+<!-- Rabobank -->
+<div class="panel" id="p-rabo">
+<div class="card">
+  <div class="bank-header">
+    <div class="bank-dot" style="background:#14532d;color:#86efac;">RABO</div>
+    <div><div class="bank-name">Rabobank</div><span class="bank-tag" style="background:#14532d;color:#86efac;">Cooperative bank — unique Agri-AI global differentiator</span></div>
+  </div>
+  <span class="model-badge" style="background:#14532d;color:#86efac;">Federated hub — cooperative model with Agri-AI as strategic wedge</span>
+  <div class="hub-spoke-diagram">
+    <div class="hub-col">
+      <div class="hub-box" style="background:#14532d;color:#86efac;border:1px solid #22c55e;">Data Science & AI Hub<br><span style="font-size:9px;font-weight:400;">~180 data scientists · Azure + GCP · CDAO-equivalent</span></div>
+      <div class="hub-box" style="background:#052e16;color:#86efac;font-size:10px;">Rabo AI Platform<br><span style="font-size:9px;font-weight:400;">Azure OpenAI + internal MLOps on Databricks</span></div>
+      <div class="hub-box" style="background:#052e16;color:#86efac;font-size:10px;">FoodFarmingFinance (FFF)<br><span style="font-size:9px;font-weight:400;">Proprietary agri-data platform · 10M+ farm profiles</span></div>
+    </div>
+    <div class="connector-area"><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div><div class="connector-line"></div></div>
+    <div class="spokes-col">
+      <div class="spoke-row"><div class="spoke-dot" style="background:#22c55e;"></div><div class="spoke-box"><div class="spoke-label">Food & Agri Banking (Global)</div>Crop yield prediction; climate risk scoring; precision farming loans; 10M+ farm profiles globally</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#22c55e;"></div><div class="spoke-box"><div class="spoke-label">Retail Banking (NL)</div>AI mortgage risk; chatbot (Rabo Assistant); personalised financial health nudges</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#22c55e;"></div><div class="spoke-box"><div class="spoke-label">Risk & Fraud</div>ML fraud detection (real-time); AI credit scoring for SME agri clients; ESG risk models</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#86efac;"></div><div class="spoke-box"><div class="spoke-label">Rabo Research (Agri Economics)</div>AI-powered food system analysis; commodity price forecasting published globally</div></div>
+      <div class="spoke-row"><div class="spoke-dot" style="background:#86efac;"></div><div class="spoke-box"><div class="spoke-label">Employee / Internal Ops</div>M365 Copilot + GitHub Copilot; AI HR tools; RPA for back-office across cooperative network</div></div>
+    </div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-item"><div class="detail-label">Unique model</div><div class="detail-val">Cooperative structure — local Rabo banks retain autonomy; central AI hub must win adoption, not mandate it</div></div>
+    <div class="detail-item"><div class="detail-label">Agri-AI edge</div><div class="detail-val">FoodFarmingFinance platform: 10M+ farm profiles, satellite imagery, soil/climate data — unique global dataset no other bank has</div></div>
+    <div class="detail-item"><div class="detail-label">Tech stack</div><div class="detail-val">Azure (primary) + Databricks MLOps + Google Cloud; Accenture partnership for AI transformation delivery</div></div>
+    <div class="detail-item"><div class="detail-label">Governance</div><div class="detail-val">DNB-supervised model risk; Responsible AI principles; cooperative board oversight adds governance layer unique to Rabo</div></div>
+  </div>
+  <div class="agentic-section">
+    <div class="agentic-title">Agentic AI Roadmap</div>
+    <span class="agentic-status status-pilot">◐ Building — Agri-AI agents as differentiated priority</span>
+    <div class="agentic-grid">
+      <div class="agentic-item"><div class="agentic-item-label">Farm Advisory Agent</div><div class="agentic-item-val">Agentic AI combining satellite imagery, soil data, weather models, and Rabo credit data to proactively advise farmers on loan structuring, crop diversification, and climate risk mitigation. Pilot across Netherlands and Australia farms 2025–2026</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Rabo Assistant → Agentic Banking</div><div class="agentic-item-val">Customer chatbot evolving to handle end-to-end mortgage applications, payment scheduling, and account management autonomously. Azure OpenAI backend; Dutch-language optimised; pilot with retail NL customer base</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Climate Risk Scoring Agent</div><div class="agentic-item-val">Autonomous agent monitors live climate and ESG data feeds to continuously re-score agricultural loan portfolio risk — alerting relationship managers to deteriorating farm credit profiles before defaults occur</div></div>
+      <div class="agentic-item"><div class="agentic-item-label">Cooperative Network AI</div><div class="agentic-item-val">Building shared AI tooling for the 89 local Rabo banks — central hub provides agent templates; local banks adapt for regional farming conditions. Federated model with central guardrails respects cooperative autonomy</div></div>
+    </div>
+    <div class="implication" style="margin-top:10px"><strong>Rabobank's agentic edge:</strong> No other bank on earth has Rabobank's proprietary agri-data depth — 10M+ farm profiles, decades of crop/climate/credit correlation data. This creates a defensible agentic AI moat in food &amp; agriculture financing that JPM, DBS, or Revolut cannot replicate. The cooperative structure slows enterprise-wide mandates but creates trust with farmer clients that tech-first banks lack.</div>
+  </div>
+  <div class="implication"><strong>Key differentiator:</strong> Rabobank's mission as a cooperative agricultural bank created a unique AI dataset that is impossible to commoditise — farm-level climate, crop yield, and financing data going back decades across 40+ countries. AI built on this dataset (farm advisory agents, climate risk scoring) is a genuine competitive moat. The cooperative governance model means AI adoption must be earned, not mandated — creating slower but stickier deployment across the network.</div>
+</div>
+</div>
+
 <!-- Side-by-side -->
 <div class="panel" id="p-compare">
 <div class="card">
@@ -429,7 +519,7 @@ th:first-child{z-index:6}
   <table>
     <thead>
       <tr>
-        <th>Dimension</th><th>ING</th><th>DBS</th><th>JP Morgan</th><th>Emirates NBD</th><th>Revolut</th><th>BofA</th><th>Klarna</th><th>Capital One</th>
+        <th>Dimension</th><th>ING</th><th>DBS</th><th>JP Morgan</th><th>Emirates NBD</th><th>Revolut</th><th>BofA</th><th>Klarna</th><th>Capital One</th><th>ABN AMRO</th><th>Rabobank</th>
       </tr>
     </thead>
     <tbody>
@@ -443,6 +533,8 @@ th:first-child{z-index:6}
         <td>Centralised hub (reuse)</td>
         <td>AI-Native & Platform-Led</td>
         <td>Centralized Enterprise + LOB Peer Partnerships</td>
+        <td>Centralised CDAO hub — risk-led, Azure-native</td>
+        <td>Federated hub — cooperative model, Agri-AI wedge</td>
       </tr>
       <tr>
         <td>Hub leader title</td>
@@ -454,6 +546,8 @@ th:first-child{z-index:6}
         <td>CDAO</td>
         <td>CEO + CTO & VP Engineering</td>
         <td>Chief Data Officer + Head of Enterprise AI</td>
+        <td>CDAO (embedded under CRO/CFO)</td>
+        <td>CDAO-equivalent — Data Science & AI Hub lead</td>
       </tr>
       <tr>
         <td>Reports to</td>
@@ -465,6 +559,8 @@ th:first-child{z-index:6}
         <td>CEO</td>
         <td>CEO Sebastian Siemiatkowski</td>
         <td>CEO Richard Fairbank</td>
+        <td>CRO / CFO</td>
+        <td>Managing Board (cooperative governance)</td>
       </tr>
       <tr>
         <td>Spoke model</td>
@@ -476,6 +572,8 @@ th:first-child{z-index:6}
         <td>Business lines reuse central Erica engine</td>
         <td>Organic bottom-up squad adoption (90% daily)</td>
         <td>Symbiotic Partnership (enterprise tools, LOB embedded scientists)</td>
+        <td>5 domain spokes; compliance-led; hub mandates standards</td>
+        <td>89 local cooperative banks + global agri BUs; hub earns adoption</td>
       </tr>
       <tr>
         <td>Data platform</td>
@@ -487,6 +585,8 @@ th:first-child{z-index:6}
         <td>Erica shared NLU engine + enterprise infra</td>
         <td>Central Neo4j Knowledge Graph (replaced 1,200+ SaaS tools)</td>
         <td>Enterprise Data Platform (AWS/Snowflake hybrid)</td>
+        <td>Azure data lake; private Azure OpenAI; GDPR NL residency</td>
+        <td>FoodFarmingFinance platform — 10M+ farm profiles; Azure + Databricks</td>
       </tr>
       <tr>
         <td>LLM / Gen AI platform</td>
@@ -498,6 +598,8 @@ th:first-child{z-index:6}
         <td>Internal LLM (Erica-based, proprietary)</td>
         <td>OpenAI strategic partnership (GPT-4) + Google Cloud/Gemini</td>
         <td>AWS-hosted "AI Factory" (open-source & proprietary LLMs)</td>
+        <td>Azure OpenAI Service (private) + M365 Copilot</td>
+        <td>Azure OpenAI + Databricks MLOps; GitHub Copilot for devs</td>
       </tr>
       <tr>
         <td>Governance model</td>
@@ -509,6 +611,8 @@ th:first-child{z-index:6}
         <td>1,200+ AI patents; enterprise AI risk framework</td>
         <td>Pivoted in 2025/2026 to hybrid "Human-in-the-Loop" support; zero retention APIs</td>
         <td>"Responsibility-by-Design" framework; rigorous model risk board</td>
+        <td>Responsible AI framework; DNB model risk supervision; EU AI Act compliant</td>
+        <td>DNB-supervised model risk; cooperative board oversight; Responsible AI principles</td>
       </tr>
       <tr>
         <td>AI team size</td>
@@ -520,6 +624,8 @@ th:first-child{z-index:6}
         <td>Not public; 213K on "Erica for Employees"</td>
         <td>~90% of ~3,000 employees use AI daily; core AI engineering squad</td>
         <td>Hundreds of ML engineers/data scientists + Enterprise AI team</td>
+        <td>~200 data scientists; ~19K employees on M365 Copilot</td>
+        <td>~180 data scientists; Accenture partnership for AI delivery</td>
       </tr>
       <tr>
         <td>Measured AI value</td>
@@ -531,6 +637,8 @@ th:first-child{z-index:6}
         <td>Erica: 2.5B interactions; $4B new tech spend</td>
         <td>Customer Support: 2/3 chat volume ($40M/yr saved). Marketing: $10M/yr saved. Q1 2026 net profitability turnaround ($1M net income vs loss).</td>
         <td>100% cloud-native since 2020; massive scale in automated credit decisioning & fraud scoring</td>
+        <td>AML cost reduction post-settlement; Anna chatbot deflecting significant call volume; no public $ figure</td>
+        <td>Farm advisory AI covering 40+ countries; fraud detection uplift; no consolidated public $ figure</td>
       </tr>
       <tr>
         <td>Maturity level</td>
@@ -542,6 +650,8 @@ th:first-child{z-index:6}
         <td>Advanced (4/5)</td>
         <td>AI-Native Leader (5/5 speed; 4/5 governance)</td>
         <td>Traditional Leader (4/5 speed; 5/5 governance)</td>
+        <td>Developing-Advanced (3/5 speed; 4/5 governance)</td>
+        <td>Developing (3/5 speed; 3/5 governance — cooperative constraints)</td>
       </tr>
     </tbody>
   </table>
