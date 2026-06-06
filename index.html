@@ -59,15 +59,18 @@ th:first-child{z-index:6}
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<h1>AI Hub-and-Spoke Operating Models</h1>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+  <h1>AI Hub-and-Spoke Operating Models</h1>
+  <span style="font-size:10px;color:#64748b;background:#1a1f2e;border:0.5px solid #2d3748;border-radius:6px;padding:3px 9px;white-space:nowrap;margin-left:12px;margin-top:2px">⚠ Public data collected by AI — may not be accurate</span>
+</div>
 <p class="subtitle">How ING, DBS, JP Morgan, Emirates NBD, Revolut, Bank of America, Klarna and Capital One organize their AI and data capabilities — May 2026</p>
 
 <div class="tabs">
-  <button class="tab active" onclick="show('ing',this)">ING</button>
+  <button class="tab active" onclick="show('rev',this)">Revolut</button>
   <button class="tab" onclick="show('dbs',this)">DBS</button>
   <button class="tab" onclick="show('jpm',this)">JP Morgan</button>
+  <button class="tab" onclick="show('ing',this)">ING</button>
   <button class="tab" onclick="show('enbd',this)">Emirates NBD</button>
-  <button class="tab" onclick="show('rev',this)">Revolut</button>
   <button class="tab" onclick="show('boa',this)">Bank of America</button>
   <button class="tab" onclick="show('klarna',this)">Klarna</button>
   <button class="tab" onclick="show('capone',this)">Capital One</button>
@@ -75,7 +78,7 @@ th:first-child{z-index:6}
 </div>
 
 <!-- ING -->
-<div class="panel active" id="p-ing">
+<div class="panel" id="p-ing">
 <div class="card">
   <div class="bank-header">
     <div class="bank-dot" style="background:#451a03;color:#fcd34d;">ING</div>
@@ -249,7 +252,7 @@ th:first-child{z-index:6}
 </div>
 
 <!-- Revolut -->
-<div class="panel" id="p-rev">
+<div class="panel active" id="p-rev">
 <div class="card">
   <div class="bank-header">
     <div class="bank-dot" style="background:#450a0a;color:#fca5a5;">REV</div>
